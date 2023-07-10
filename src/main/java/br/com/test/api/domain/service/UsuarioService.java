@@ -17,7 +17,7 @@ public class UsuarioService {
     }
 
     public ResponseEntity<List<Usuario>> consultarUsarios() {
-        var usuarios = repository.findAll();
+        var usuarios = repository.findAllByStatusUsuarioIsTrue();
 
         return ResponseEntity.ok(usuarios);
     }
