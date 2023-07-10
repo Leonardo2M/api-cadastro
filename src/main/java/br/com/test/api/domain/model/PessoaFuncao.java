@@ -1,5 +1,6 @@
 package br.com.test.api.domain.model;
 
+import br.com.test.api.dto.listagem.PessoaDTO;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -36,7 +37,7 @@ public class PessoaFuncao {
     @JsonBackReference("areaAtuacaoReference")
     private AreaAtuacao areaAtuacao;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_funcao")
     private Funcao funcao;
 
@@ -45,4 +46,14 @@ public class PessoaFuncao {
     private LocalDate criadoData;
     private String modificadoPor;
     private LocalDate modificadoData;
+
+    public PessoaFuncao(PessoaDTO pessoa, String oabPessoaFuncao, String matriculaPessoaFuncao, AreaAtuacao areaAtuacao, Funcao funcao, Nucleo nucleo) {
+        this.pessoa = new Pessoa(pessoa);
+        this.matriculaPessoaFuncao = matriculaPessoaFuncao;
+        this.oabPessoaFuncao = oabPessoaFuncao;
+        this.nucleo = nucleo;
+        this.areaAtuacao = areaAtuacao;
+        this.funcao = funcao;
+        this.statusPessoaFuncao = true;
+    }
 }

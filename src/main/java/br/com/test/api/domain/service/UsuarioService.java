@@ -1,12 +1,14 @@
 package br.com.test.api.domain.service;
 
-import br.com.test.api.domain.model.Usuario;
-import br.com.test.api.domain.repository.UsuarioRepository;
-import br.com.test.api.dto.ListagemUsuario;
-import org.apache.catalina.User;
+import br.com.test.api.domain.model.*;
+import br.com.test.api.domain.repository.*;
+import br.com.test.api.dto.cadastro.DadosCadastroUsuario;
+import br.com.test.api.dto.DadosDetalhadosUsuario;
+import br.com.test.api.dto.listagem.ListagemUsuario;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -14,11 +16,22 @@ import java.util.List;
 public class UsuarioService {
 
     private final UsuarioRepository repository;
+    private final AreaAtuacaoRepository areaAtuacaoRepository;
+    private final FuncaoRepository funcaoRepository;
+    private final NucleoRepository nucleoRepository;
+    private final PapelRepository papelRepository;
     private final ModelMapper modelMapper;
 
-    public UsuarioService(UsuarioRepository repository, ModelMapper modelMapper) {
+    private final PessoaFuncaoService pessoaFuncaoService;
+
+    public UsuarioService(UsuarioRepository repository, AreaAtuacaoRepository areaAtuacaoRepository, FuncaoRepository funcaoRepository, NucleoRepository nucleoRepository, PapelRepository papelRepository, ModelMapper modelMapper, PessoaFuncaoService pessoaFuncaoService) {
         this.repository = repository;
+        this.areaAtuacaoRepository = areaAtuacaoRepository;
+        this.funcaoRepository = funcaoRepository;
+        this.nucleoRepository = nucleoRepository;
+        this.papelRepository = papelRepository;
         this.modelMapper = modelMapper;
+        this.pessoaFuncaoService = pessoaFuncaoService;
     }
 
     public ResponseEntity<List<ListagemUsuario>> consultarUsarios() {
@@ -27,10 +40,24 @@ public class UsuarioService {
         return ResponseEntity.ok(usuarios);
     }
 
-    public ResponseEntity cadastrarUsuario(Usuario usuario) {
+    public ResponseEntity<DadosDetalhadosUsuario> cadastrarUsuario(DadosCadastroUsuario dados, UriComponentsBuilder uriComponentsBuilder) {
+        AreaAtuacao areaAtuacao = areaAtuacaoRepository.findById(dados.getPessoaFuncao().getIdAreaAtuacao()).orElseThrow();
+        Funcao funcao = funcaoRepository.findById(dados.getPessoaFuncao().getIdFuncao()).orElseThrow();
+        Nucleo nucleo = nucleoRepository.findById(dados.getPessoaFuncao().getIdNucleo()).orElseThrow();
+        Papel papel = papelRepository.findById(dados.getIdPapel()).orElseThrow();
+
+        PessoaFuncao pessoaFuncao = new PessoaFuncao(dados.getPessoaFuncao().getPessoa(), dados.getPessoaFuncao().getOabPessoaFuncao(), dados.getPessoaFuncao().getMatriculaPessoaFuncao(),
+                areaAtuacao, funcao, nucleo);
+
+        pessoaFuncaoService.salvar(pessoaFuncao);
+
+        Usuario usuario = new Usuario(dados.getLoginUsuario(), dados.getEmailUsuario(), dados.getSenhaUsuario(), pessoaFuncao, papel);
+
         repository.save(usuario);
 
-        return ResponseEntity.ok().build();
+        var uri = uriComponentsBuilder.path("usuarios/{id}").buildAndExpand(usuario.getIdUsuario()).toUri();
+
+        return ResponseEntity.created(uri).body(modelMapper.map(usuario, DadosDetalhadosUsuario.class));
     }
 
     public ResponseEntity alterarUsuario(Long id, Usuario dados) {
