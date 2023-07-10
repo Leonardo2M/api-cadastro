@@ -2,8 +2,8 @@ package br.com.test.api.controller;
 
 import br.com.test.api.domain.model.Usuario;
 import br.com.test.api.domain.service.UsuarioService;
+import br.com.test.api.dto.ListagemUsuario;
 import jakarta.transaction.Transactional;
-import jakarta.websocket.server.PathParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +20,7 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> mostrarUsarios() {
+    public ResponseEntity<List<ListagemUsuario>> mostrarUsarios() {
         return service.consultarUsarios();
     }
 

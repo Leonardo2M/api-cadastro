@@ -21,7 +21,7 @@ public class Nucleo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idNucleo;
     private String descricaoNucleo;
-    private Boolean statusPapel;
+    private Boolean statusNucleo;
     private String criadoPor;
     private LocalDate criadoData;
     private String modificadoPor;

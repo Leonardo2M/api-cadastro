@@ -15,8 +15,8 @@ INSERT INTO tb_area_atuacao (descricao_area_atuacao, status_area_atuacao, criado
 VALUES ('Descrição da Área de Atuação', TRUE, 'admin', '2023-07-09', 'admin', '2023-07-09');
 
 -- Inserindo dados para a tabela tb_nucleos
-INSERT INTO tb_nucleos (descricao_nucleo, status_papel, criado_por, criado_data, modificado_por, modificado_data)
-VALUES ('Descrição do Núcleo', TRUE, 'admin', '2023-07-09', 'admin', '2023-07-09');
+INSERT INTO tb_nucleos (descricao_nucleo, id_endereco, status_nucleo, criado_por, criado_data, modificado_por, modificado_data)
+VALUES ('Descrição do Núcleo', 1, TRUE, 'admin', '2023-07-09', 'admin', '2023-07-09');
 
 -- Inserindo dados para a tabela tb_funcao
 INSERT INTO tb_funcao (descricao_funcao, status_funcao, criado_por, criado_data, modificado_por, modificado_data)
@@ -29,11 +29,6 @@ VALUES (1, 'Matricula 123', 'OAB 456', 1, 1, 1, TRUE, 'admin', '2023-07-09', 'ad
 -- Inserindo dados para a tabela tb_usuarios
 INSERT INTO tb_usuarios (email_usuario, login_usuario, senha_usuario, id_papel, status_usuario, criado_por, criado_data, modificado_por, modificado_data, id_pessoa_funcao)
 VALUES ('usuario1@example.com', 'usuario1', 'senha123', 1, TRUE, 'admin', '2023-07-01', 'admin', '2023-07-01', 1);
-
--- Inserindo dados para a tabela tb_nucleos
-INSERT INTO tb_nucleos (descricao_nucleo, status_papel, criado_por, criado_data, modificado_por, modificado_data)
-VALUES ('Descrição do Núcleo', TRUE, 'admin', '2023-07-01', 'admin', '2023-07-01');
-
 
 -- Inserindo dados para a tabela tb_subcategoria
 INSERT INTO tb_subcategoria (descricao_subcategoria, status_categoria, criado_por, criado_data, modificado_por, modificado_data)
