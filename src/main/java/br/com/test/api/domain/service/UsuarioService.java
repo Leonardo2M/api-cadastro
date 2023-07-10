@@ -69,8 +69,9 @@ public class UsuarioService {
         return ResponseEntity.ok().body(modelMapper.map(usuario, DadosDetalhadosUsuario.class));
     }
 
-    public ResponseEntity deletar(Long id) {
+    public ResponseEntity<?> deletar(Long id) {
         var usuario = repository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("Não foi encontrado usuário com id = " + id));
+
         usuario.desativar();
 
         return ResponseEntity.noContent().build();
