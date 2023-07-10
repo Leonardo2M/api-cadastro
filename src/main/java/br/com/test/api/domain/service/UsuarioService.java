@@ -1,6 +1,7 @@
 package br.com.test.api.domain.service;
 
 import br.com.test.api.domain.exception.EntidadeNaoEncontradaException;
+import br.com.test.api.domain.exception.UsuarioDesativadoException;
 import br.com.test.api.domain.model.*;
 import br.com.test.api.domain.repository.*;
 import br.com.test.api.dto.cadastro.DadosCadastroUsuario;
@@ -71,6 +72,10 @@ public class UsuarioService {
 
     public ResponseEntity<?> deletar(Long id) {
         var usuario = repository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("Não foi encontrado usuário com id = " + id));
+
+        if(!usuario.getStatusUsuario()) {
+            throw new UsuarioDesativadoException("Usuário já excluído do sistema.");
+        }
 
         usuario.desativar();
 
