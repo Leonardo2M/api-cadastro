@@ -37,4 +37,8 @@ public class Usuario {
     public void atualizar(Usuario dados) {
         this.pessoaFuncao.getPessoa().setNomeCompleto(dados.getPessoaFuncao().getPessoa().getNomeCompleto());
     }
+
+    public void desativar() {
+        this.statusUsuario = false;
+    }
 }

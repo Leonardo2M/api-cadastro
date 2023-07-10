@@ -36,5 +36,10 @@ public class UsuarioController {
         return service.alterarUsuario(id, dados);
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deletarUsuario(@PathVariable Long id) {
+        return service.deletar(id);
+    }
 }
 

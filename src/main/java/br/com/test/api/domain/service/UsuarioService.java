@@ -35,4 +35,11 @@ public class UsuarioService {
 
         return ResponseEntity.ok().body(usuario);
     }
+
+    public ResponseEntity deletar(Long id) {
+        var usuario = repository.findById(id).orElseThrow();
+        usuario.desativar();
+
+        return ResponseEntity.noContent().build();
+    }
 }
