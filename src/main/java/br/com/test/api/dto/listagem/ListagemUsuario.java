@@ -1,7 +1,7 @@
-package br.com.test.api.dto;
+package br.com.test.api.dto.listagem;
 
-import br.com.test.api.dto.usuario.PapelDTO;
-import br.com.test.api.dto.usuario.PessoaFuncaoDTO;
+import br.com.test.api.dto.listagem.PapelDTO;
+import br.com.test.api.dto.listagem.PessoaFuncaoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

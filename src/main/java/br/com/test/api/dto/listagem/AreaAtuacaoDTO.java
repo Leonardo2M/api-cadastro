@@ -1,4 +1,4 @@
-package br.com.test.api.dto.usuario;
+package br.com.test.api.dto.listagem;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class NucleoDTO {
+public class AreaAtuacaoDTO {
 
-    private String descricaoNucleo;
-    private EnderecoDTO endereco;
+    private String descricaoAreaAtuacao;
 
 }

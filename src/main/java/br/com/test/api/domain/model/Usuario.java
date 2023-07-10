@@ -25,7 +25,7 @@ public class Usuario {
     private String loginUsuario;
     private String senhaUsuario;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_papel")
     private Papel papel;
     private Boolean statusUsuario;
@@ -33,6 +33,15 @@ public class Usuario {
     private LocalDate criadoData;
     private String modificadoPor;
     private LocalDate modificadoData;
+
+    public Usuario(String loginUsuario, String emailUsuario, String senhaUsuario, PessoaFuncao pessoaFuncao, Papel papel) {
+        this.pessoaFuncao = pessoaFuncao;
+        this.emailUsuario = emailUsuario;
+        this.loginUsuario = loginUsuario;
+        this.senhaUsuario = senhaUsuario;
+        this.papel = papel;
+        this.statusUsuario = true;
+    }
 
     public void atualizar(Usuario dados) {
         this.pessoaFuncao.getPessoa().setNomeCompleto(dados.getPessoaFuncao().getPessoa().getNomeCompleto());

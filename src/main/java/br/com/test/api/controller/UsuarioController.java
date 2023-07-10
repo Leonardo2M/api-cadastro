@@ -2,10 +2,12 @@ package br.com.test.api.controller;
 
 import br.com.test.api.domain.model.Usuario;
 import br.com.test.api.domain.service.UsuarioService;
-import br.com.test.api.dto.ListagemUsuario;
+import br.com.test.api.dto.cadastro.DadosCadastroUsuario;
+import br.com.test.api.dto.listagem.ListagemUsuario;
 import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -26,8 +28,8 @@ public class UsuarioController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity cadastrarUsuario(@RequestBody Usuario usuario) {
-        return service.cadastrarUsuario(usuario);
+    public ResponseEntity cadastrarUsuario(@RequestBody DadosCadastroUsuario dados, UriComponentsBuilder uriComponentsBuilder) {
+        return service.cadastrarUsuario(dados, uriComponentsBuilder);
     }
 
     @PutMapping("/{id}")

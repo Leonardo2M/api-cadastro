@@ -1,6 +1,7 @@
 package br.com.test.api.domain.model;
 
 
+import br.com.test.api.dto.listagem.EnderecoDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,4 +34,15 @@ public class Endereco {
     private LocalDate modificadoData;
 
 
+    public Endereco(EnderecoDTO endereco) {
+        this.ruaEndereco = endereco.getRuaEndereco();
+        this.numeroEndereco = endereco.getNumeroEndereco();
+        this.bairroEndereco = endereco.getBairroEndereco();
+        this.cidadeEndereco = endereco.getCidadeEndereco();
+        this.cepEndereco = endereco.getCepEndereco();
+        this.estadoEndereco = endereco.getEstadoEndereco();
+        this.paisEndereco = endereco.getPaisEndereco();
+        this.complementoEndereco = endereco.getComplementoEndereco();
+        this.statusEndereco = true;
+    }
 }
