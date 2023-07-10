@@ -1,5 +1,6 @@
 package br.com.test.api.domain.service;
 
+import br.com.test.api.domain.exception.EntidadeNaoEncontradaException;
 import br.com.test.api.domain.model.*;
 import br.com.test.api.domain.repository.*;
 import br.com.test.api.dto.cadastro.DadosCadastroUsuario;
@@ -41,10 +42,10 @@ public class UsuarioService {
     }
 
     public ResponseEntity<DadosDetalhadosUsuario> cadastrarUsuario(DadosCadastroUsuario dados, UriComponentsBuilder uriComponentsBuilder) {
-        AreaAtuacao areaAtuacao = areaAtuacaoRepository.findById(dados.getPessoaFuncao().getIdAreaAtuacao()).orElseThrow();
-        Funcao funcao = funcaoRepository.findById(dados.getPessoaFuncao().getIdFuncao()).orElseThrow();
-        Nucleo nucleo = nucleoRepository.findById(dados.getPessoaFuncao().getIdNucleo()).orElseThrow();
-        Papel papel = papelRepository.findById(dados.getIdPapel()).orElseThrow();
+        AreaAtuacao areaAtuacao = areaAtuacaoRepository.findById(dados.getPessoaFuncao().getIdAreaAtuacao()).orElseThrow(() -> new EntidadeNaoEncontradaException("Não existe área de atuação com esse id"));
+        Funcao funcao = funcaoRepository.findById(dados.getPessoaFuncao().getIdFuncao()).orElseThrow(() -> new EntidadeNaoEncontradaException("Não existe função com esse id"));
+        Nucleo nucleo = nucleoRepository.findById(dados.getPessoaFuncao().getIdNucleo()).orElseThrow(() -> new EntidadeNaoEncontradaException("Não existe núcleo com esse id"));
+        Papel papel = papelRepository.findById(dados.getIdPapel()).orElseThrow(() -> new EntidadeNaoEncontradaException("Não existe papel com esse id"));
 
         PessoaFuncao pessoaFuncao = new PessoaFuncao(dados.getPessoaFuncao().getPessoa(), dados.getPessoaFuncao().getOabPessoaFuncao(), dados.getPessoaFuncao().getMatriculaPessoaFuncao(),
                 areaAtuacao, funcao, nucleo);
@@ -60,16 +61,16 @@ public class UsuarioService {
         return ResponseEntity.created(uri).body(modelMapper.map(usuario, DadosDetalhadosUsuario.class));
     }
 
-    public ResponseEntity alterarUsuario(Long id, Usuario dados) {
-        var usuario = repository.findById(id).orElseThrow();
+    public ResponseEntity<DadosDetalhadosUsuario> alterarUsuario(Long id, Usuario dados) {
+        var usuario = repository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("Não foi encontrado usuário com id = " + id));
         usuario.atualizar(dados);
         repository.save(usuario);
 
-        return ResponseEntity.ok().body(usuario);
+        return ResponseEntity.ok().body(modelMapper.map(usuario, DadosDetalhadosUsuario.class));
     }
 
     public ResponseEntity deletar(Long id) {
-        var usuario = repository.findById(id).orElseThrow();
+        var usuario = repository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("Não foi encontrado usuário com id = " + id));
         usuario.desativar();
 
         return ResponseEntity.noContent().build();
