@@ -34,4 +34,7 @@ public class Usuario {
     private String modificadoPor;
     private LocalDate modificadoData;
 
+    public void atualizar(Usuario dados) {
+        this.pessoaFuncao.getPessoa().setNomeCompleto(dados.getPessoaFuncao().getPessoa().getNomeCompleto());
+    }
 }

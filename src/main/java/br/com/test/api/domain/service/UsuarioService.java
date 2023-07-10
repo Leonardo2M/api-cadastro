@@ -27,4 +27,12 @@ public class UsuarioService {
 
         return ResponseEntity.ok().build();
     }
+
+    public ResponseEntity alterarUsuario(Long id, Usuario dados) {
+        var usuario = repository.findById(id).orElseThrow();
+        usuario.atualizar(dados);
+        repository.save(usuario);
+
+        return ResponseEntity.ok().body(usuario);
+    }
 }
