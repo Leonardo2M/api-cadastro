@@ -2,6 +2,7 @@ package br.com.test.api.controller;
 
 import br.com.test.api.domain.model.Usuario;
 import br.com.test.api.domain.service.UsuarioService;
+import br.com.test.api.dto.alterar.DadosAtualizacaoUsuario;
 import br.com.test.api.dto.cadastro.DadosCadastroUsuario;
 import br.com.test.api.dto.listagem.ListagemUsuario;
 import jakarta.transaction.Transactional;
@@ -34,7 +35,7 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity alterarUsuario(@PathVariable Long id, @RequestBody Usuario dados) {
+    public ResponseEntity alterarUsuario(@PathVariable Long id, @RequestBody DadosAtualizacaoUsuario dados) {
         return service.alterarUsuario(id, dados);
     }
 

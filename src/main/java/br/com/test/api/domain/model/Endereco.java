@@ -45,4 +45,39 @@ public class Endereco {
         this.complementoEndereco = endereco.getComplementoEndereco();
         this.statusEndereco = true;
     }
+
+    public void atualizar(Endereco endereco) {
+        if (endereco.getRuaEndereco() != null) {
+            this.ruaEndereco = endereco.getRuaEndereco();
+        }
+
+        if (endereco.getNumeroEndereco() != 0) {
+            this.numeroEndereco = endereco.getNumeroEndereco();
+        }
+
+        if (endereco.getBairroEndereco() != null) {
+            this.bairroEndereco = endereco.getBairroEndereco();
+        }
+
+        if (endereco.getCidadeEndereco() != null) {
+            this.cidadeEndereco = endereco.getCidadeEndereco();
+        }
+
+        if (endereco.getCepEndereco() != null) {
+            this.cepEndereco = endereco.getCepEndereco();
+        }
+
+        if (endereco.getEstadoEndereco() != null) {
+            this.estadoEndereco = endereco.getEstadoEndereco();
+        }
+
+        if (endereco.getPaisEndereco() != null) {
+            this.paisEndereco = endereco.getPaisEndereco();
+        }
+
+        if (endereco.getComplementoEndereco() != null) {
+            this.complementoEndereco = endereco.getComplementoEndereco();
+        }
+    }
+
 }

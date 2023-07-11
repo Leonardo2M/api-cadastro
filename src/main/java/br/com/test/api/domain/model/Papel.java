@@ -28,4 +28,5 @@ public class Papel {
 
     @OneToMany
     private List<Usuario> usuarios = new ArrayList<>();
+
 }

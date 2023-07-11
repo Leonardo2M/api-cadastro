@@ -27,7 +27,7 @@ public class Nucleo {
     private String modificadoPor;
     private LocalDate modificadoData;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_endereco")
     private Endereco endereco;
 

@@ -4,6 +4,7 @@ import br.com.test.api.domain.exception.EntidadeNaoEncontradaException;
 import br.com.test.api.domain.exception.UsuarioDesativadoException;
 import br.com.test.api.domain.model.*;
 import br.com.test.api.domain.repository.*;
+import br.com.test.api.dto.alterar.DadosAtualizacaoUsuario;
 import br.com.test.api.dto.cadastro.DadosCadastroUsuario;
 import br.com.test.api.dto.DadosDetalhadosUsuario;
 import br.com.test.api.dto.listagem.ListagemUsuario;
@@ -62,9 +63,19 @@ public class UsuarioService {
         return ResponseEntity.created(uri).body(modelMapper.map(usuario, DadosDetalhadosUsuario.class));
     }
 
-    public ResponseEntity<DadosDetalhadosUsuario> alterarUsuario(Long id, Usuario dados) {
+    public ResponseEntity<DadosDetalhadosUsuario> alterarUsuario(Long id, DadosAtualizacaoUsuario dados) {
         var usuario = repository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("Não foi encontrado usuário com id = " + id));
-        usuario.atualizar(dados);
+        var papel = papelRepository.findById(dados.getIdPapel()).orElseThrow(() -> new EntidadeNaoEncontradaException("Não existe papel com esse id"));
+
+        AreaAtuacao areaAtuacao = areaAtuacaoRepository.findById(dados.getPessoaFuncao().getIdAreaAtuacao()).orElseThrow(() -> new EntidadeNaoEncontradaException("Não existe área de atuação com esse id"));
+        Funcao funcao = funcaoRepository.findById(dados.getPessoaFuncao().getIdFuncao()).orElseThrow(() -> new EntidadeNaoEncontradaException("Não existe função com esse id"));
+        Nucleo nucleo = nucleoRepository.findById(dados.getPessoaFuncao().getIdNucleo()).orElseThrow(() -> new EntidadeNaoEncontradaException("Não existe núcleo com esse id"));
+
+
+        PessoaFuncao pessoaFuncao = new PessoaFuncao(dados.getPessoaFuncao().getPessoa(), dados.getPessoaFuncao().getOabPessoaFuncao(), dados.getPessoaFuncao().getMatriculaPessoaFuncao(),
+                areaAtuacao, funcao, nucleo);
+
+        usuario.atualizar(dados,pessoaFuncao, papel);
         repository.save(usuario);
 
         return ResponseEntity.ok().body(modelMapper.map(usuario, DadosDetalhadosUsuario.class));

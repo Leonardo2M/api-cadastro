@@ -43,4 +43,30 @@ public class Pessoa {
         this.endereco = new Endereco(pessoa.getEndereco());
         this.statusPessoa = true;
     }
+
+    public void atualizar(Pessoa pessoa) {
+        if (pessoa.getNomeCompleto() != null) {
+            this.nomeCompleto = pessoa.getNomeCompleto();
+        }
+
+        if (pessoa.getDataDeNascimento() != null) {
+            this.dataDeNascimento = pessoa.getDataDeNascimento();
+        }
+
+        if (pessoa.getCpf() != null) {
+            this.cpf = pessoa.getCpf();
+        }
+
+        if (pessoa.getTelefone() != null) {
+            this.telefone = pessoa.getTelefone();
+        }
+
+        if (pessoa.getPossuiDeficiencia() != null) {
+            this.possuiDeficiencia = pessoa.getPossuiDeficiencia();
+        }
+
+        if(pessoa.getEndereco() != null) {
+            this.endereco.atualizar(pessoa.getEndereco());
+        }
+    }
 }

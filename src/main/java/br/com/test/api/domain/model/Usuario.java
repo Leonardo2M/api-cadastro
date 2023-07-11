@@ -1,5 +1,6 @@
 package br.com.test.api.domain.model;
 
+import br.com.test.api.dto.alterar.DadosAtualizacaoUsuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -43,8 +44,25 @@ public class Usuario {
         this.statusUsuario = true;
     }
 
-    public void atualizar(Usuario dados) {
-        this.pessoaFuncao.getPessoa().setNomeCompleto(dados.getPessoaFuncao().getPessoa().getNomeCompleto());
+    public void atualizar(DadosAtualizacaoUsuario dados,PessoaFuncao pessoaFuncao, Papel papel) {
+        if(dados.getPessoaFuncao() != null) {
+            this.pessoaFuncao.atualizar(pessoaFuncao);
+        }
+        if(dados.getEmailUsuario() != null) {
+            this.emailUsuario = dados.getEmailUsuario();
+        }
+
+        if(dados.getLoginUsuario() != null) {
+            this.loginUsuario = dados.getLoginUsuario();
+        }
+
+        if(dados.getSenhaUsuario() != null) {
+            this.senhaUsuario = dados.getSenhaUsuario();
+        }
+
+        if(dados.getIdPapel() != null) {
+            this.papel = papel;
+        }
     }
 
     public void desativar() {

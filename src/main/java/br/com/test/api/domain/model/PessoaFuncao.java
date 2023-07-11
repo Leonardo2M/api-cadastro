@@ -56,4 +56,30 @@ public class PessoaFuncao {
         this.funcao = funcao;
         this.statusPessoaFuncao = true;
     }
+
+    public void atualizar(PessoaFuncao pessoaFuncao) {
+        if(pessoaFuncao.getPessoa() != null) {
+            this.pessoa.atualizar(pessoaFuncao.getPessoa());
+        }
+
+        if(pessoaFuncao.getMatriculaPessoaFuncao() != null) {
+            this.matriculaPessoaFuncao = pessoaFuncao.getMatriculaPessoaFuncao();
+        }
+
+        if(pessoaFuncao.getOabPessoaFuncao() != null) {
+            this.oabPessoaFuncao = pessoaFuncao.getOabPessoaFuncao();
+        }
+
+        if (pessoaFuncao.getNucleo() != null) {
+            this.nucleo = pessoaFuncao.getNucleo();
+        }
+
+        if (pessoaFuncao.getAreaAtuacao() != null) {
+            this.areaAtuacao = pessoaFuncao.getAreaAtuacao();
+        }
+
+        if (pessoaFuncao.getFuncao() != null) {
+            this.funcao = pessoaFuncao.getFuncao();
+        }
+    }
 }

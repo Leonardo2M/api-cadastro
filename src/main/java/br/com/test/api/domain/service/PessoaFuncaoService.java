@@ -19,4 +19,5 @@ public class PessoaFuncaoService {
         pessoaService.salvar(pessoaFuncao.getPessoa());
         repository.save(pessoaFuncao);
     }
+
 }
