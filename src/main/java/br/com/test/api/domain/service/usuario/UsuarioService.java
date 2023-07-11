@@ -5,6 +5,7 @@ import br.com.test.api.domain.infra.exception.UsuarioDesativadoException;
 import br.com.test.api.domain.infra.validacoes.Validacoes;
 import br.com.test.api.domain.model.usuario.*;
 import br.com.test.api.domain.repository.usuario.*;
+import br.com.test.api.domain.service.email.EmailService;
 import br.com.test.api.dto.usuario.DadosDetalhadosUsuario;
 import br.com.test.api.dto.usuario.alterar.DadosAtualizacaoUsuario;
 import br.com.test.api.dto.usuario.cadastro.DadosCadastroUsuario;
@@ -27,10 +28,11 @@ public class UsuarioService {
     private final PapelRepository papelRepository;
     private final ModelMapper modelMapper;
     private final PessoaFuncaoService pessoaFuncaoService;
+    private final EmailService emailService;
 
     private List<Validacoes> validacoes = new ArrayList<>();
 
-    public UsuarioService(UsuarioRepository repository, AreaAtuacaoRepository areaAtuacaoRepository, FuncaoRepository funcaoRepository, NucleoRepository nucleoRepository, PapelRepository papelRepository, ModelMapper modelMapper, PessoaFuncaoService pessoaFuncaoService, List<Validacoes> validacoes) {
+    public UsuarioService(UsuarioRepository repository, AreaAtuacaoRepository areaAtuacaoRepository, FuncaoRepository funcaoRepository, NucleoRepository nucleoRepository, PapelRepository papelRepository, ModelMapper modelMapper, PessoaFuncaoService pessoaFuncaoService, EmailService emailService, List<Validacoes> validacoes) {
         this.repository = repository;
         this.areaAtuacaoRepository = areaAtuacaoRepository;
         this.funcaoRepository = funcaoRepository;
@@ -38,6 +40,7 @@ public class UsuarioService {
         this.papelRepository = papelRepository;
         this.modelMapper = modelMapper;
         this.pessoaFuncaoService = pessoaFuncaoService;
+        this.emailService = emailService;
         this.validacoes = validacoes;
     }
 
@@ -58,10 +61,13 @@ public class UsuarioService {
 
         pessoaFuncaoService.salvar(pessoaFuncao);
 
-        Usuario usuario = new Usuario(dados.getLoginUsuario(), pessoaFuncao, papel);
+        Usuario usuario = new Usuario(dados.getLoginUsuario(), dados.getEmailUsuario(), pessoaFuncao, papel);
 
         validacoes.forEach(v -> v.validarCadastro(dados));
         repository.save(usuario);
+
+        //Realiza o envio do email com senha aleatória
+        emailService.sendPasswordEmail(usuario.getEmailUsuario());
 
         var uri = uriComponentsBuilder.path("usuarios/{id}").buildAndExpand(usuario.getIdUsuario()).toUri();
 

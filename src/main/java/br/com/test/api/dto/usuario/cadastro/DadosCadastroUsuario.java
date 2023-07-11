@@ -11,6 +11,7 @@ public class DadosCadastroUsuario {
 
     private PessoaFuncaoCadastro pessoaFuncao;
     private String loginUsuario;
+    private String emailUsuario;
     private Long idPapel;
 
 }

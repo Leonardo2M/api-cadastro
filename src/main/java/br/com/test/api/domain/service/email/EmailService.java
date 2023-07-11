@@ -5,13 +5,14 @@ import br.com.test.api.domain.model.enums.StatusEmail;
 import br.com.test.api.domain.repository.email.EmailRepository;
 import br.com.test.api.dto.email.EmailDTO;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 public class EmailService {
@@ -19,6 +20,9 @@ public class EmailService {
     private EmailRepository repository;
     private final ModelMapper modelMapper;
     private final JavaMailSender emailSender;
+
+    @Value("${spring.mail.username}")
+    private String emailFrom;
 
     public EmailService(EmailRepository repository, ModelMapper modelMapper, JavaMailSender emailSender) {
         this.repository = repository;
@@ -49,5 +53,25 @@ public class EmailService {
         }
     }
 
+    public void sendPasswordEmail(String emailUsuario) {
+        try{
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(this.emailFrom);
+            message.setTo(emailUsuario);
+            message.setSubject("Cadastro realizado.");
+            message.setText("Cadastro realizado com sucesso\n"
+                    + "senha para primeiro acesso: " + gerarSenha());
+            emailSender.send(message);
 
+        } catch (MailException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static String gerarSenha() {
+        UUID uuid = UUID.randomUUID();
+        String senha = uuid.toString().substring(0, 7);
+
+        return senha;
+    }
 }

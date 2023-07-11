@@ -35,9 +35,10 @@ public class Usuario {
     private String modificadoPor;
     private LocalDate modificadoData;
 
-    public Usuario(String loginUsuario, PessoaFuncao pessoaFuncao, Papel papel) {
+    public Usuario(String loginUsuario, String emailUsuario, PessoaFuncao pessoaFuncao, Papel papel) {
         this.pessoaFuncao = pessoaFuncao;
         this.loginUsuario = loginUsuario;
+        this.emailUsuario = emailUsuario;
         this.papel = papel;
         this.statusUsuario = true;
     }
