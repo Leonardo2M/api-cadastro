@@ -11,6 +11,10 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     List<Usuario> findAllByStatusUsuarioIsTrue();
 
-    //boolean existsByPessoaCpf(String cpf);
+    boolean existsByPessoaFuncaoPessoaCpf(String cpf);
+
+    boolean existsByLoginUsuario(String login);
+
+    boolean existsByEmailUsuario(String email);
 
 }

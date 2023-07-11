@@ -1,18 +1,20 @@
 package br.com.test.api.domain.service;
 
-import br.com.test.api.domain.exception.EntidadeNaoEncontradaException;
-import br.com.test.api.domain.exception.UsuarioDesativadoException;
+import br.com.test.api.domain.infra.exception.EntidadeNaoEncontradaException;
+import br.com.test.api.domain.infra.exception.UsuarioDesativadoException;
+import br.com.test.api.domain.infra.validacoes.Validacoes;
 import br.com.test.api.domain.model.*;
 import br.com.test.api.domain.repository.*;
+import br.com.test.api.dto.DadosDetalhadosUsuario;
 import br.com.test.api.dto.alterar.DadosAtualizacaoUsuario;
 import br.com.test.api.dto.cadastro.DadosCadastroUsuario;
-import br.com.test.api.dto.DadosDetalhadosUsuario;
 import br.com.test.api.dto.listagem.ListagemUsuario;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,10 +26,11 @@ public class UsuarioService {
     private final NucleoRepository nucleoRepository;
     private final PapelRepository papelRepository;
     private final ModelMapper modelMapper;
-
     private final PessoaFuncaoService pessoaFuncaoService;
 
-    public UsuarioService(UsuarioRepository repository, AreaAtuacaoRepository areaAtuacaoRepository, FuncaoRepository funcaoRepository, NucleoRepository nucleoRepository, PapelRepository papelRepository, ModelMapper modelMapper, PessoaFuncaoService pessoaFuncaoService) {
+    private List<Validacoes> validacoes = new ArrayList<>();
+
+    public UsuarioService(UsuarioRepository repository, AreaAtuacaoRepository areaAtuacaoRepository, FuncaoRepository funcaoRepository, NucleoRepository nucleoRepository, PapelRepository papelRepository, ModelMapper modelMapper, PessoaFuncaoService pessoaFuncaoService, List<Validacoes> validacoes) {
         this.repository = repository;
         this.areaAtuacaoRepository = areaAtuacaoRepository;
         this.funcaoRepository = funcaoRepository;
@@ -35,6 +38,7 @@ public class UsuarioService {
         this.papelRepository = papelRepository;
         this.modelMapper = modelMapper;
         this.pessoaFuncaoService = pessoaFuncaoService;
+        this.validacoes = validacoes;
     }
 
     public ResponseEntity<List<ListagemUsuario>> consultarUsarios() {
@@ -54,8 +58,9 @@ public class UsuarioService {
 
         pessoaFuncaoService.salvar(pessoaFuncao);
 
-        Usuario usuario = new Usuario(dados.getLoginUsuario(), dados.getEmailUsuario(), dados.getSenhaUsuario(), pessoaFuncao, papel);
+        Usuario usuario = new Usuario(dados.getLoginUsuario(), dados.getEmailUsuario(), pessoaFuncao, papel);
 
+        validacoes.forEach(v -> v.validarCadastro(dados));
         repository.save(usuario);
 
         var uri = uriComponentsBuilder.path("usuarios/{id}").buildAndExpand(usuario.getIdUsuario()).toUri();

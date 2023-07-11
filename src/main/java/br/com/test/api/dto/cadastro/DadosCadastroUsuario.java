@@ -12,7 +12,6 @@ public class DadosCadastroUsuario {
     private PessoaFuncaoCadastro pessoaFuncao;
     private String emailUsuario;
     private String loginUsuario;
-    private String senhaUsuario;
     private Long idPapel;
 
 }
