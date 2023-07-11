@@ -1,8 +1,8 @@
 package br.com.test.api.domain.infra.validacoes;
 
 import br.com.test.api.domain.infra.exception.DadosCadastradosException;
-import br.com.test.api.domain.repository.UsuarioRepository;
-import br.com.test.api.dto.cadastro.DadosCadastroUsuario;
+import br.com.test.api.domain.repository.usuario.UsuarioRepository;
+import br.com.test.api.dto.usuario.cadastro.DadosCadastroUsuario;
 import org.springframework.stereotype.Component;
 
 @Component

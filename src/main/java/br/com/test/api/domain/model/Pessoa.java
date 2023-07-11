@@ -1,6 +1,6 @@
 package br.com.test.api.domain.model;
 
-import br.com.test.api.dto.listagem.PessoaDTO;
+import br.com.test.api.dto.usuario.listagem.PessoaDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -68,5 +68,9 @@ public class Pessoa {
         if(pessoa.getEndereco() != null) {
             this.endereco.atualizar(pessoa.getEndereco());
         }
+    }
+
+    public void desativar() {
+        this.statusPessoa = false;
     }
 }

@@ -7,8 +7,8 @@ INSERT INTO tb_enderecos (rua_endereco, numero_endereco, bairro_endereco, cidade
 VALUES ('Rua Exemplo', 123, 'Bairro Exemplo', 'Cidade Exemplo', '12345-000', 'Estado Exemplo', 'País Exemplo', 'Complemento Exemplo', TRUE, 'admin', '2023-07-01', 'admin', '2023-07-01');
 
 -- Inserindo dados para a tabela tb_pessoa
-INSERT INTO tb_pessoa (nome_completo, data_de_nascimento, cpf, telefone, possui_deficiencia, id_endereco, status_pessoa, criado_por, criado_data, modificado_por, modificado_data)
-VALUES ('Fulano de Tal', '1990-01-01', '12345678901', '1234567890', FALSE, 1, TRUE, 'admin', '2023-07-01', 'admin', '2023-07-01');
+INSERT INTO tb_pessoa (nome_completo, cpf, telefone, possui_deficiencia, id_endereco, status_pessoa, criado_por, criado_data, modificado_por, modificado_data)
+VALUES ('Fulano de Tal', '12345678901', '1234567890', FALSE, 1, TRUE, 'admin', '2023-07-01', 'admin', '2023-07-01');
 
 -- Inserindo dados para a tabela tb_area_atuacao
 INSERT INTO tb_area_atuacao (descricao_area_atuacao, status_area_atuacao, criado_por, criado_data, modificado_por, modificado_data)
@@ -55,8 +55,8 @@ INSERT INTO tb_enderecos (rua_endereco, numero_endereco, bairro_endereco, cidade
 VALUES ('Rua Outro Exemplo', 456, 'Bairro Outro Exemplo', 'Cidade Outro Exemplo', '12345-111', 'Estado Outro Exemplo', 'País Outro Exemplo', 'Complemento Outro Exemplo', TRUE, 'admin', '2023-07-02', 'admin', '2023-07-02');
 
 -- Inserindo outro dado na tabela tb_pessoa
-INSERT INTO tb_pessoa (nome_completo, data_de_nascimento, cpf, telefone, possui_deficiencia, id_endereco, status_pessoa, criado_por, criado_data, modificado_por, modificado_data)
-VALUES ('Ciclano de Tal', '1995-05-05', '98765432109', '9876543210', TRUE, 2, TRUE, 'admin', '2023-07-02', 'admin', '2023-07-02');
+INSERT INTO tb_pessoa (nome_completo, cpf, telefone, possui_deficiencia, id_endereco, status_pessoa, criado_por, criado_data, modificado_por, modificado_data)
+VALUES ('Ciclano de Tal', '98765432109', '9876543210', TRUE, 2, TRUE, 'admin', '2023-07-02', 'admin', '2023-07-02');
 
 -- Inserindo outro dado na tabela tb_area_atuacao
 INSERT INTO tb_area_atuacao (descricao_area_atuacao, status_area_atuacao, criado_por, criado_data, modificado_por, modificado_data)

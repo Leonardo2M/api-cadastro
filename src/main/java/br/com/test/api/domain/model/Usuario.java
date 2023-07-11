@@ -1,6 +1,6 @@
 package br.com.test.api.domain.model;
 
-import br.com.test.api.dto.alterar.DadosAtualizacaoUsuario;
+import br.com.test.api.dto.usuario.alterar.DadosAtualizacaoUsuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,9 +35,8 @@ public class Usuario {
     private String modificadoPor;
     private LocalDate modificadoData;
 
-    public Usuario(String loginUsuario, String emailUsuario, PessoaFuncao pessoaFuncao, Papel papel) {
+    public Usuario(String loginUsuario, PessoaFuncao pessoaFuncao, Papel papel) {
         this.pessoaFuncao = pessoaFuncao;
-        this.emailUsuario = emailUsuario;
         this.loginUsuario = loginUsuario;
         this.papel = papel;
         this.statusUsuario = true;
@@ -66,5 +65,6 @@ public class Usuario {
 
     public void desativar() {
         this.statusUsuario = false;
+        this.pessoaFuncao.desativar();
     }
 }

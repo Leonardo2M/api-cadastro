@@ -1,11 +1,10 @@
 package br.com.test.api.controller;
 
-import br.com.test.api.domain.model.Usuario;
-import br.com.test.api.domain.service.UsuarioService;
-import br.com.test.api.dto.DadosDetalhadosUsuario;
-import br.com.test.api.dto.alterar.DadosAtualizacaoUsuario;
-import br.com.test.api.dto.cadastro.DadosCadastroUsuario;
-import br.com.test.api.dto.listagem.ListagemUsuario;
+import br.com.test.api.domain.service.usuario.UsuarioService;
+import br.com.test.api.dto.usuario.DadosDetalhadosUsuario;
+import br.com.test.api.dto.usuario.alterar.DadosAtualizacaoUsuario;
+import br.com.test.api.dto.usuario.cadastro.DadosCadastroUsuario;
+import br.com.test.api.dto.usuario.listagem.ListagemUsuario;
 import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

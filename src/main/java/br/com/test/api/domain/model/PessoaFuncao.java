@@ -1,6 +1,6 @@
 package br.com.test.api.domain.model;
 
-import br.com.test.api.dto.listagem.PessoaDTO;
+import br.com.test.api.dto.usuario.listagem.PessoaDTO;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -81,5 +81,10 @@ public class PessoaFuncao {
         if (pessoaFuncao.getFuncao() != null) {
             this.funcao = pessoaFuncao.getFuncao();
         }
+    }
+
+    public void desativar() {
+        this.statusPessoaFuncao = false;
+        this.pessoa.desativar();
     }
 }

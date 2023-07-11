@@ -1,7 +1,7 @@
 package br.com.test.api.domain.model;
 
 
-import br.com.test.api.dto.listagem.EnderecoDTO;
+import br.com.test.api.dto.usuario.listagem.EnderecoDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
