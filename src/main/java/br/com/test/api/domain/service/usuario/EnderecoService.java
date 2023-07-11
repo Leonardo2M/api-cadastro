@@ -1,6 +1,6 @@
 package br.com.test.api.domain.service.usuario;
 
-import br.com.test.api.domain.model.Endereco;
+import br.com.test.api.domain.model.usuario.Endereco;
 import br.com.test.api.domain.repository.usuario.EnderecoRepository;
 import org.springframework.stereotype.Service;
 

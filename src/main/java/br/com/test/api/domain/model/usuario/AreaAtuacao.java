@@ -1,4 +1,4 @@
-package br.com.test.api.domain.model;
+package br.com.test.api.domain.model.usuario;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;

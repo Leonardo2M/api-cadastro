@@ -1,4 +1,4 @@
-package br.com.test.api.domain.model;
+package br.com.test.api.domain.model.usuario;
 
 import br.com.test.api.dto.usuario.alterar.DadosAtualizacaoUsuario;
 import jakarta.persistence.*;

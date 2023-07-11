@@ -3,7 +3,7 @@ package br.com.test.api.domain.service.usuario;
 import br.com.test.api.domain.infra.exception.EntidadeNaoEncontradaException;
 import br.com.test.api.domain.infra.exception.UsuarioDesativadoException;
 import br.com.test.api.domain.infra.validacoes.Validacoes;
-import br.com.test.api.domain.model.*;
+import br.com.test.api.domain.model.usuario.*;
 import br.com.test.api.domain.repository.usuario.*;
 import br.com.test.api.dto.usuario.DadosDetalhadosUsuario;
 import br.com.test.api.dto.usuario.alterar.DadosAtualizacaoUsuario;

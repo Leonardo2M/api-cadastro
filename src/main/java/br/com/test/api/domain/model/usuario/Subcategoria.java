@@ -1,4 +1,4 @@
-package br.com.test.api.domain.model;
+package br.com.test.api.domain.model.usuario;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,27 +6,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-@Table(name = "tb_papel")
+@Table(name = "tb_subcategoria")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Papel {
+public class Subcategoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPapel;
-    private String descricaoPapel;
-    private Boolean statusPapel;
+    private Long id;
+    private String descricaoSubcategoria;
+    private Boolean statusCategoria;
     private String criadoPor;
     private LocalDate criadoData;
     private String modificadoPor;
     private LocalDate modificadoData;
-
-    @OneToMany
-    private List<Usuario> usuarios = new ArrayList<>();
 
 }

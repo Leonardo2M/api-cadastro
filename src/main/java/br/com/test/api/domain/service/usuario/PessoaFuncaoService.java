@@ -1,6 +1,6 @@
 package br.com.test.api.domain.service.usuario;
 
-import br.com.test.api.domain.model.PessoaFuncao;
+import br.com.test.api.domain.model.usuario.PessoaFuncao;
 import br.com.test.api.domain.repository.usuario.PessoaFuncaoRepository;
 import org.springframework.stereotype.Service;
 

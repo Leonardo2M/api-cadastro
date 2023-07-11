@@ -1,30 +1,26 @@
-package br.com.test.api.domain.model;
+package br.com.test.api.domain.model.usuario;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.mapping.Join;
 
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "tb_avisos")
+@Table(name = "tb_funcao")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Aviso {
+@Data
+public class Funcao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idAviso;
-
-    @ManyToOne
-    @JoinColumn(name = "id_usuario")
-    private Usuario usuario;
-    private String tituloAviso;
-    private Boolean statusAviso;
+    private Long id;
+    private String descricaoFuncao;
+    private Boolean statusFuncao;
     private String criadoPor;
     private LocalDate criadoData;
     private String modificadoPor;
     private LocalDate modificadoData;
-
 }
