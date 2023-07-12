@@ -1,9 +1,10 @@
 package br.com.test.api.controller;
 
-import br.com.test.api.domain.model.Usuario;
-import br.com.test.api.domain.service.UsuarioService;
-import br.com.test.api.dto.cadastro.DadosCadastroUsuario;
-import br.com.test.api.dto.listagem.ListagemUsuario;
+import br.com.test.api.domain.service.usuario.UsuarioService;
+import br.com.test.api.dto.usuario.DadosDetalhadosUsuario;
+import br.com.test.api.dto.usuario.alterar.DadosAtualizacaoUsuario;
+import br.com.test.api.dto.usuario.cadastro.DadosCadastroUsuario;
+import br.com.test.api.dto.usuario.listagem.ListagemUsuario;
 import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,19 +29,19 @@ public class UsuarioController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity cadastrarUsuario(@RequestBody DadosCadastroUsuario dados, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<DadosDetalhadosUsuario> cadastrarUsuario(@RequestBody DadosCadastroUsuario dados, UriComponentsBuilder uriComponentsBuilder) {
         return service.cadastrarUsuario(dados, uriComponentsBuilder);
     }
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity alterarUsuario(@PathVariable Long id, @RequestBody Usuario dados) {
+    public ResponseEntity<DadosDetalhadosUsuario> alterarUsuario(@PathVariable Long id, @RequestBody DadosAtualizacaoUsuario dados) {
         return service.alterarUsuario(id, dados);
     }
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity deletarUsuario(@PathVariable Long id) {
+    public ResponseEntity<?> deletarUsuario(@PathVariable Long id) {
         return service.deletar(id);
     }
 }
