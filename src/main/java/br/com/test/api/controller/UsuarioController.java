@@ -5,6 +5,7 @@ import br.com.test.api.dto.usuario.DadosDetalhadosUsuario;
 import br.com.test.api.dto.usuario.alterar.DadosAtualizacaoUsuario;
 import br.com.test.api.dto.usuario.cadastro.DadosCadastroUsuario;
 import br.com.test.api.dto.usuario.listagem.ListagemUsuario;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")
+@SecurityRequirement(name = "bearer-key")
 public class UsuarioController {
 
     private final UsuarioService service;

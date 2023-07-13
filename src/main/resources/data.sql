@@ -32,7 +32,7 @@ VALUES (1, 'Matricula 123', 'OAB 456', 1, 1, 1, TRUE, 'admin', '2023-07-09', 'ad
 
 -- Inserindo dados para a tabela tb_usuarios
 INSERT INTO tb_usuarios (email_usuario, login_usuario, senha_usuario, id_papel, status_usuario, criado_por, criado_data, modificado_por, modificado_data, id_pessoa_funcao)
-VALUES ('usuario1@example.com', 'usuario1', 'senha123', 1, TRUE, 'admin', '2023-07-01', 'admin', '2023-07-01', 1);
+VALUES ('usuario1@example.com', 'usuario1', '$2a$10$tT/VN3cMhM1/mgQTwCr1POCaavA3EMiWM9yfo4LXao/Vx5OaUpLR2', 1, TRUE, 'admin', '2023-07-01', 'admin', '2023-07-01', 1);
 
 -- Inserindo dados para a tabela tb_subcategoria
 INSERT INTO tb_subcategoria (descricao_subcategoria, status_categoria, criado_por, criado_data, modificado_por, modificado_data)
